@@ -33,6 +33,9 @@ public class Hand {
 	public Card getCard(int cardIndex){
 		return cards.get(cardIndex);
 	}
+	public ArrayList<Card> getAllCard(){
+		return cards;
+	}
 	
 	// Get - Update bet
 	public double getBet(){

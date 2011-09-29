@@ -16,6 +16,6 @@ public class NumberCard extends Card{
 		return number==1;
 	}
 	public String printCard(){
-		return suit.name() +"  " + number;
+		return  ""+number;
 	}
 }

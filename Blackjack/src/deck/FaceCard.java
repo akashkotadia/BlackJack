@@ -18,6 +18,6 @@ public class FaceCard extends Card{
 	}
 	
 	public String printCard(){
-		return suit.name() +"  " + face.name();
+		return face.name();
 	}
 }

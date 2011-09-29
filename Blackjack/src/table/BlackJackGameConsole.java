@@ -13,7 +13,7 @@ import actors.Player;
 import deck.BlackJackDeck;
 import deck.Card;
 
-public class BlackJackGame {
+public class BlackJackGameConsole {
 
 	ArrayList<Player> players;
 	BlackJackDeck deck;
@@ -22,7 +22,7 @@ public class BlackJackGame {
 	
 	BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 	
-	public BlackJackGame(BlackJackTable table){
+	public BlackJackGameConsole(BlackJackTable table){
 		players=table.getAllLivePlayer();
 		deck=table.getBJDeck();
 		dealer=table.getDealer();
@@ -52,7 +52,7 @@ public class BlackJackGame {
 				System.out.print(player.getName() + ":["+ hand.getCard(0).printCard()+","+hand.getCard(1).printCard()+"] \n");
 			}
 		}
-		System.out.print("Dealer" + ":["+ dealer.getHand().getCard(0).printCard());
+		System.out.print("Dealer" + ":["+ dealer.getHand().getCard(0).printCard()+"]\n");
 	}
 	// 3. Decision : Split/Hit/Stay/Double
 	public void askToPlay() throws NumberFormatException, IOException{
@@ -74,24 +74,26 @@ public class BlackJackGame {
 						System.out.println("Invalid Input");
 						break;
 					}
+					
+					System.out.print(player.getName() + " : ");
+					for(Card card:hand.getAllCard()){
+						System.out.print(card.printCard()+",");
+					}
+					System.out.println();
+					if(hand.isBurst())
+						System.out.println(player.getName() + " Burst!" );
 				}while(!decision.contains("S") && !hand.isBurst());
 			}
 		}
 		System.out.println("\n\n");
-		// Print Cards
-				for(Player player:players){
-					for(Hand hand:player.getAllhands()){
-						System.out.print(player.getName() + ":["+ hand.getCard(0).printCard()+","+hand.getCard(1).printCard()+"] \n");
-					}
-				}
 	}
 	// 4. Dealer Play up to 17
 	public void dealerPlay(){
-		System.out.print("Dealer" + ":["+ dealer.getHand().getCard(0).printCard() + "," + dealer.getHand().getCard(1).printCard());
+		System.out.print("Dealer" + ":["+ dealer.getHand().getCard(0).printCard() + "," + dealer.getHand().getCard(1).printCard()+"]\n");
 		while(!dealer.getHand().isBurst() && dealer.getHand().getPoints().getFavorableTotal()<17){
 			Card c=deck.drawCard();
 			dealer.getHand().addCard(c);
-			c.printCard();
+			System.out.print(c.printCard()+",");
 		}
 		if(dealer.getHand().isBurst()){
 			System.out.println("Dealer Burst");
@@ -112,20 +114,24 @@ public class BlackJackGame {
 		else{
 			for(Player player:players){
 				for(Hand hand:player.getAllhands()){
-					if(dealer.getHand().getPoints().getFavorableTotal() < hand.getPoints().getFavorableTotal()){
-						player.getAccount().deposit(hand.getBet()*2);
-					}
-					else if (dealer.getHand().getPoints().getFavorableTotal() == hand.getPoints().getFavorableTotal()){
-						player.getAccount().deposit(hand.getBet());
+					if(!hand.isBurst()){
+						if(dealer.getHand().getPoints().getFavorableTotal() < hand.getPoints().getFavorableTotal()){
+							player.getAccount().deposit(hand.getBet()*2);
+							System.out.println(player.getName() +"'s Hand : Win");
+						}
+						else if (dealer.getHand().getPoints().getFavorableTotal() == hand.getPoints().getFavorableTotal()){
+							player.getAccount().deposit(hand.getBet());
+							System.out.println(player.getName() +"'s Hand : Push");
+						}
+						else{
+							System.out.println(player.getName() +"'s Hand : Lose");
+						}
 					}
 				}
 			}
 		}
-		
-		System.out.println("\n============ FINAL BALANCE ==============");
 		for(Player player:players){
-			System.out.print(player.getName() +" : " + player.getAccount().getBalance());
+			System.out.println(player.getName() +" : " + player.getAccount().getBalance());
 		}
-		System.out.println("========================================================");
 	}
 }

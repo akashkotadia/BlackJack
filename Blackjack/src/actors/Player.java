@@ -36,7 +36,6 @@ public class Player {
 	// Action On Hand
 	public void hit(Hand hand,Card card){
 		hand.addCard(card);
-		System.out.println(card.printCard());
 	}
 	public void doubleHit(Hand hand,Card card){
 		hand.addCard(card);
