@@ -29,7 +29,6 @@ public class Hand {
 			points.updateHandPointsTotal(card);
 			status.updateStatus(points,cards.size());
 		}
-		System.out.println("*"+points.getFavorableTotal());
 	}
 	public Card getCard(int cardIndex){
 		return cards.get(cardIndex);
