@@ -6,11 +6,11 @@ public class PlayerAccount {
 	public PlayerAccount(double balance){
 		this.balance=balance;
 	}
-	public void addAmount(double amount){
+	public void deposit(double amount){
 		balance+=amount;
 		System.out.println("Added : " + amount + "Balance : "+balance);
 	}
-	public void subtractAmount(double amount){
+	public void withdrawl(double amount){
 		balance-=amount;
 		System.out.println("Subtract : " + amount + "Balance :" + balance);
 	}

@@ -17,7 +17,7 @@ public class FaceCard extends Card{
 		return faceValue;
 	}
 	
-	public void printCard(){
-		System.out.print(suit.name() +"  " + face.name());
+	public String printCard(){
+		return suit.name() +"  " + face.name();
 	}
 }

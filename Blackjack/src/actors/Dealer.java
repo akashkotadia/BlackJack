@@ -1,20 +1,17 @@
 package actors;
 
-import table.Game;
+import hand.Hand;
 
 public class Dealer {
 
 	String name;
-	double balance;
-	Game game;
+	Hand hand;
 	
-	public Dealer(String name,double balance){
-		this.name=name;
-		this.balance=balance;
-		game=new Game();
+	public Dealer(){
+		hand=new Hand();
 	}
 	
-	public Game getGame(){
-		return game;
+	public Hand getHand(){
+		return hand;
 	}
 }

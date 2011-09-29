@@ -15,7 +15,7 @@ public class NumberCard extends Card{
 	public boolean isAce(){
 		return number==1;
 	}
-	public void printCard(){
-		System.out.print(suit.name() +"  " + number);
+	public String printCard(){
+		return suit.name() +"  " + number;
 	}
 }

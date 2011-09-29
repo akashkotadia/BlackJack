@@ -21,7 +21,7 @@ public class Card {
 	public Card(Suit suit){
 		this.suit=suit;
 	}
-	public void printCard(){}
+	public String printCard(){return null;}
 	public int getBlackJackValue(){return 0;}
 	public boolean isAce(){return false;}
 }
